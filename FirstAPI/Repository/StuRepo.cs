@@ -50,7 +50,7 @@ namespace FirstAPI.Repository
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.Read())
             {
-                Student12 student = new Student12()
+                stu = new Student12()
                 {
                     Student_id = Convert.ToInt32(reader["id"]),
                     Student_name = reader["Name"].ToString(),
@@ -59,7 +59,10 @@ namespace FirstAPI.Repository
                     Fees = Convert.ToInt32(reader["Fees"]),
                 };
             }
-        }
+                con.Close();
+                return stu;
+               
+            }
         public void AddStudent1(Student12 Student12)
         {
             SqlConnection con = new SqlConnection(_connectionString);
@@ -79,6 +82,7 @@ namespace FirstAPI.Repository
 
         }
         public void DeleteStudent1(int id)
+
         {
 
         }
