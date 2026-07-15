@@ -62,7 +62,7 @@ namespace FirstAPI.Repository
          }
         public void AddStudent1(Student12 student1)
         {
-
+            SqlConnection con = new SqlConnection(_connectionString); 
            
         }
 
