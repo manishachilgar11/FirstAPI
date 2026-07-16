@@ -70,7 +70,7 @@ namespace FirstAPI.Repository
             con.Open();
             SqlCommand cmd=new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@Student_id", student1.Student_id);
-            cmd.Parameters.AddWithValue("@Student_Name",student1.Student_name);
+            cmd.Parameters.AddWithValue("@Student_Name", student1.Student_name);
             cmd.Parameters.AddWithValue("@location", student1.location);
             cmd.Parameters.AddWithValue("@ISActive", student1.ISActive);
             cmd.Parameters.AddWithValue("@Emai_Id", student1.Email_Id);
