@@ -1,6 +1,7 @@
 ﻿using FirstAPI.Model;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.Data.SqlClient;
+using System.Reflection.Metadata;
 
 namespace FirstAPI.Repository
 {
@@ -26,7 +27,7 @@ namespace FirstAPI.Repository
             {
                 Student12 student = new Student12()
                 {
-                    Student_id = Convert.ToInt32(reader["ID"]),
+                    Student_id = Convert.ToInt32(reader["Student_id"]),
                     Student_name = reader["Student_Name"].ToString(),
                     location = reader["location"].ToString(),
                     ISActive = Convert.ToBoolean(reader["ISActive"]),
@@ -35,6 +36,7 @@ namespace FirstAPI.Repository
                 };
                 students.Add(student);
             }
+            reader.Close();
             con.Close();
             return students;
         }
@@ -42,15 +44,16 @@ namespace FirstAPI.Repository
         {
             Student12 students = null;
             SqlConnection con = new SqlConnection(_connectionString);
-            String query = "Select*From Student12 Where Id=@id";
+            String query = "Select*From Student12 Where Student_id=@id";
             con.Open();
             SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.Read())
             {
                 Student12 stu = new Student12()
                 {
-                    Student_id = Convert.ToInt32(reader["ID"]),
+                    Student_id = Convert.ToInt32(reader["Student_id"]),
                     Student_name = reader["Student_Name"].ToString(),
                     location = reader["location"].ToString(),
                     ISActive = Convert.ToBoolean(reader["ISActive"]),
@@ -66,14 +69,14 @@ namespace FirstAPI.Repository
         {
             SqlConnection con = new SqlConnection(_connectionString);
            String query = "Insert into Student12(Student_id,Student_Name,location,ISActive,Email_Id,Fees)"
-             + "Values(@Student_id,@Student_Name,@location,@Email_Id,@Fees)";
+             + "Values(@Student_id,@Student_Name,@location,@ISActive,@Email_Id,@Fees)";
             con.Open();
             SqlCommand cmd=new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@Student_id", student1.Student_id);
             cmd.Parameters.AddWithValue("@Student_Name", student1.Student_name);
             cmd.Parameters.AddWithValue("@location", student1.location);
             cmd.Parameters.AddWithValue("@ISActive", student1.ISActive);
-            cmd.Parameters.AddWithValue("@Emai_Id", student1.Email_Id);
+            cmd.Parameters.AddWithValue("@Email_Id", student1.Email_Id);
             cmd.Parameters.AddWithValue("@Fees",student1.Fees);
             cmd.ExecuteNonQuery();
             con.Close();
@@ -89,14 +92,20 @@ namespace FirstAPI.Repository
             cmd.Parameters.AddWithValue("@Student_Name", student1.Student_name);
             cmd.Parameters.AddWithValue("@location", student1.location);
             cmd.Parameters.AddWithValue("@ISActive", student1.ISActive);
-            cmd.Parameters.AddWithValue("@Emai_Id", student1.Email_Id);
+            cmd.Parameters.AddWithValue("@Email_Id", student1.Email_Id);
             cmd.Parameters.AddWithValue("@Fees", student1.Fees);
             cmd.ExecuteNonQuery();
             con.Close();
         }
         public void DeleteStudent1(int id)
         {
-
+            SqlConnection con = new SqlConnection(_connectionString);
+            String query = "Delete from Student12 where id=@id";
+            con.Open();
+            SqlCommand cmd= new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            con.Close ();
 
         }
     }

@@ -3,15 +3,17 @@
     "http": {
       "commandName": "Project",
       "launchBrowser": true,
+      "lunchUrl": "Swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5035"
+      "applicationUrl": "http://localhost:5035/Swagger"
     },
     "https": {
-      "commandName": "Project", 
+      "commandName": "Project",
       "launchBrowser": true,
+      "lunchUrl": "Swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -21,6 +23,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "lunchUrl": "Swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -30,6 +33,7 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "lunchUrl": "Swagger",
     "iisExpress": {
       "applicationUrl": "http://localhost:62623/",
       "sslPort": 44376
